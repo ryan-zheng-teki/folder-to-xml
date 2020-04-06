@@ -1,4 +1,4 @@
-import * as fs from 'fs';
+import fs from 'fs';
 import { WorkNode, NodeTag} from './types';
 
 if(process.argv.length <= 2) {
@@ -6,29 +6,35 @@ if(process.argv.length <= 2) {
     process.exit(-1);
 }
 
-let blogsPath = process.argv[3];
-let outputPath = process.argv[4];
+console.log('number of aguments');
+
+let length = process.argv.length;
+let outputPath  = process.argv[length-1];
+let blogsDir = process.argv[length-2];
 let nextWork = null;
+let fd: any;
 
-let fd;
-try {
-  fd = fs.openSync(outputPath, 'w');
-  generateXmlForFilesStruts(blogsPath);
-} catch (err) {
-  console.log(err);
-  process.exit(1);
-} finally {
-  if (fd !== undefined)
-    fs.closeSync(fd);
-}
+generateXmlForFilesStruts(blogsDir,outputPath);
 
-function generateXmlForFilesStruts(rootDir) {
-    let rootNode: WorkNode = createRootNode(rootDir);
-    nextWork = rootNode;
+function generateXmlForFilesStruts(rootDir,targetFile) {
+    try {
+        fd = fs.openSync(targetFile, 'w');
+        let rootNode: WorkNode = createRootNode(rootDir);
+        nextWork = rootNode;
 
-    while(nextWork != null) {
-        nextWork = beginWork(nextWork);
+        while(nextWork != null) {
+            nextWork = beginWork(nextWork);
+        }
     }
+    catch (err) {
+        console.log(err);
+        process.exit(1);
+      } finally {
+        if (fd !== undefined)
+          fs.closeSync(fd);
+    }
+
+    
 }
 
 /* beginWork for dir
@@ -134,19 +140,20 @@ function createRootNode(rootDir): WorkNode {
 //write the xml start tag to the file descriptor
 function createXmlStartTag(directoryNode:WorkNode){
     let spaces = ' '.repeat(directoryNode.indent);
-    fs.appendFileSync(fd, spaces + '<' + getLastNodeName(directoryNode) + '>\n', 'utf8');
+    fs.appendFileSync(fd, spaces + '<' + getLastPart(directoryNode) + '>\n', 'utf8');
 }
 
 //create xml end tag
 function createXmlEndTag(directoryNode:WorkNode){
     let spaces = ' '.repeat(directoryNode.indent);
-    fs.appendFileSync(fd, spaces + '</' + getLastNodeName(directoryNode) + '>\n', 'utf8');
+    fs.appendFileSync(fd, spaces + '</' + getLastPart(directoryNode) + '>\n', 'utf8');
 }
 
 function createFileXmlNode(fileNode:WorkNode) {
     let spaces = ' '.repeat(fileNode.indent);
     fs.appendFileSync(fd, spaces + '<File>\n', 'utf8');
     
+    createFileNameTag(fileNode);
     createCreatedTimeTag(fileNode);
     createModifiedTimeTag(fileNode);
 
@@ -156,6 +163,11 @@ function createFileXmlNode(fileNode:WorkNode) {
 function createModifiedTimeTag(fileNode:WorkNode) {
     let spaces = ' '.repeat(fileNode.indent + 3);
     fs.appendFileSync(fd, spaces + '<modifiedTime>'+ fileNode.modifiedTime+'</modifiedTime>\n', 'utf8');
+}
+
+function createFileNameTag(fileNode:WorkNode) {
+    let spaces = ' '.repeat(fileNode.indent + 3);
+    fs.appendFileSync(fd, spaces + '<name>'+ getLastPart(fileNode) + '</name>\n', 'utf8');
 }
 
 function createCreatedTimeTag(fileNode:WorkNode) {
@@ -168,7 +180,9 @@ function createFileEndTag(fileNode:WorkNode) {
     fs.appendFileSync(fd, spaces + '</File>\n', 'utf8');
 }
 
-function getLastNodeName(currentNode:WorkNode) {
+function getLastPart(currentNode:WorkNode) {
     let arr = currentNode.path.split('/');
     return arr[arr.length-1];
 }
+
+export default generateXmlForFilesStruts;
