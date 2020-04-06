@@ -25,5 +25,10 @@
     ],
     "rules": {
         "no-unused-vars": 0
-    }
+    },
+    "overrides": [
+        {
+          "excludedFiles": "dist/**/*.js"
+        }
+    ]
 }

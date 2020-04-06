@@ -1,3 +1,7 @@
+# Introduction
+This is a simple package currently to convert folder structure into xml file. We used typescript with nodejs.
+So first we have to compile the code to generate the file code structure.
+
 
 # Algorithm
 

@@ -1,12 +1,13 @@
 {
     "compilerOptions": {
+      "skipLibCheck": true,
       "target": "es6",
       "module": "es6",
       "outDir": "dist",
-      "sourceMap": true
+      "sourceMap": false
     },
     "include": [
-      "**/*.ts"
+      "src/**/*.ts"
     ],
     "exclude": [
       "node_modules"
