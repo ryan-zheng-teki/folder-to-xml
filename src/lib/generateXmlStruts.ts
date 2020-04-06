@@ -1,22 +1,9 @@
 import fs from 'fs';
 import { WorkNode, NodeTag} from './types';
 
-if(process.argv.length <= 2) {
-    console.log("Usage: " + __filename + " path/to/directory");
-    process.exit(-1);
-}
-
-console.log('number of aguments');
-
-let length = process.argv.length;
-let outputPath  = process.argv[length-1];
-let blogsDir = process.argv[length-2];
-let nextWork = null;
 let fd: any;
-
-generateXmlForFilesStruts(blogsDir,outputPath);
-
-function generateXmlForFilesStruts(rootDir,targetFile) {
+let nextWork = null;
+export function generateXmlForFilesStruts(rootDir,targetFile) {
     try {
         fd = fs.openSync(targetFile, 'w');
         let rootNode: WorkNode = createRootNode(rootDir);
@@ -32,9 +19,7 @@ function generateXmlForFilesStruts(rootDir,targetFile) {
       } finally {
         if (fd !== undefined)
           fs.closeSync(fd);
-    }
-
-    
+    } 
 }
 
 /* beginWork for dir

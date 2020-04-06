@@ -1,4 +1,4 @@
-import generateXmlForFilesStruts from './readDir';
+import generateXmlForFilesStruts from './generateXmlStruts';
 
 
 test('adds 1 + 2 to equal 3', () => {
