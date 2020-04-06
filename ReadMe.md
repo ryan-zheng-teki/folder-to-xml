@@ -1,8 +1,9 @@
 
-Algorithm
-We used non recursive way of parsing the directories.
+# Algorithm
 
-(1)set current to be the input directory, list all the items in the directory
+
+
+set current to be the input directory, list all the items in the directory
 create a dirNode {
     dir: current
     parent: parentNode,
@@ -28,4 +29,6 @@ When we use child, then we add indent. When we go to parent, we decrease indent.
 then set the current to be the directory. parent to be the current.
 case 2. If its files, then create a list of files nodes.each node contains the files information createdTime,modifiedTime.
 set the current to be parent.
-*/ 
+
+# installation
+npm run compile
