@@ -33,6 +33,12 @@ When we use child, then we add indent. When we go to parent, we decrease indent.
 then set the current to be the directory. parent to be the current.
 case 2. If its files, then create a list of files nodes.each node contains the files information createdTime,modifiedTime.
 set the current to be parent.
+# Introduction
+This is a simple command line tool for generating xml files for a folder structure.
 
-# installation
-npm run compile
+
+# How To Use
+
+After you install the package, you can simply run the following command
+
+<b>folder-to-xml source-folder-name targt-file</b>
