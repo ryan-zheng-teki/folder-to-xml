@@ -5,29 +5,31 @@ let fd: any;
 let nextWork = null;
 
 
-function logExit(message: string) {
-    process.stdout.write(message);
-    process.exit(1);
-}
 function checkIfFolderExist(rootDir) {
     if (!fs.existsSync(rootDir)) {
-        logExit(rootDir + " does not exist");
+        console.log(rootDir + " does not exist");
+        return false;
     }
+    return true;
 }
 
 export function generateXmlForFilesStruts(rootDir,targetFile) {
     try {
-        checkIfFolderExist(rootDir);
-        fd = fs.openSync(targetFile, 'w');
-        let rootNode: WorkNode = createRootNode(rootDir);
-        nextWork = rootNode;
-
-        while(nextWork != null) {
-            nextWork = beginWork(nextWork);
+        if(checkIfFolderExist(rootDir)) {
+            fd = fs.openSync(targetFile, 'w');
+            let rootNode: WorkNode = createRootNode(rootDir);
+            nextWork = rootNode;
+    
+            while(nextWork != null) {
+                nextWork = beginWork(nextWork);
+            }
+            return true;
         }
+        return false;
     }
     catch (err) {
-        logExit(err);
+        console.log(err);
+        return false;
     } finally {
         if (fd !== undefined)
           fs.closeSync(fd);
