@@ -10,22 +10,26 @@ let nextWork = null;
 function checkIfFolderExist(rootDir) {
     if (!fs_1.default.existsSync(rootDir)) {
         console.log(rootDir + " does not exist");
-        process.exit(1);
+        return false;
     }
+    return true;
 }
 function generateXmlForFilesStruts(rootDir, targetFile) {
     try {
-        checkIfFolderExist(rootDir);
-        fd = fs_1.default.openSync(targetFile, 'w');
-        let rootNode = createRootNode(rootDir);
-        nextWork = rootNode;
-        while (nextWork != null) {
-            nextWork = beginWork(nextWork);
+        if (checkIfFolderExist(rootDir)) {
+            fd = fs_1.default.openSync(targetFile, 'w');
+            let rootNode = createRootNode(rootDir);
+            nextWork = rootNode;
+            while (nextWork != null) {
+                nextWork = beginWork(nextWork);
+            }
+            return true;
         }
+        return false;
     }
     catch (err) {
         console.log(err);
-        process.exit(1);
+        return false;
     }
     finally {
         if (fd !== undefined)
