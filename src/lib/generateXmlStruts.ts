@@ -3,8 +3,17 @@ import { WorkNode, NodeTag} from './types';
 
 let fd: any;
 let nextWork = null;
+
+function checkIfFolderExist(rootDir) {
+    if (!fs.existsSync(rootDir)) {
+        console.log(rootDir + " does not exist");
+        process.exit(1);
+    }
+}
+
 export function generateXmlForFilesStruts(rootDir,targetFile) {
     try {
+        checkIfFolderExist(rootDir);
         fd = fs.openSync(targetFile, 'w');
         let rootNode: WorkNode = createRootNode(rootDir);
         nextWork = rootNode;
