@@ -7,8 +7,15 @@ const fs_1 = __importDefault(require("fs"));
 const types_1 = require("./types");
 let fd;
 let nextWork = null;
+function checkIfFolderExist(rootDir) {
+    if (!fs_1.default.existsSync(rootDir)) {
+        console.log(rootDir + " does not exist");
+        process.exit(1);
+    }
+}
 function generateXmlForFilesStruts(rootDir, targetFile) {
     try {
+        checkIfFolderExist(rootDir);
         fd = fs_1.default.openSync(targetFile, 'w');
         let rootNode = createRootNode(rootDir);
         nextWork = rootNode;
