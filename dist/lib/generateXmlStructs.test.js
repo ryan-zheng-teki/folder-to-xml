@@ -5,5 +5,6 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const generateXmlStruts_1 = __importDefault(require("./generateXmlStruts"));
 test('check xml file generated', () => {
-    generateXmlStruts_1.default('<target folder>', '<target file>');
+    let result = generateXmlStruts_1.default('<target folder>', '<target file>');
+    expect(result).toBe(true);
 });
