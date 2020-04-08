@@ -4,9 +4,7 @@
   "description": "",
   "main": "./dist/index.js",
   "scripts": {
-    "test": "jest",
-    "lint": "eslint",
-    "compile": "tsc"
+    "test": "jest"
   },
   "keywords": [],
   "bin": {
@@ -18,10 +16,7 @@
   },
   "author": "Ryan Zheng",
   "license": "MIT",
-  "dependencies": {
-    "lodash": "^4.17.15",
-    "minimist": "^1.2.5"
-  },
+  "dependencies": {},
   "devDependencies": {
     "jest": "^25.2.7"
   }
