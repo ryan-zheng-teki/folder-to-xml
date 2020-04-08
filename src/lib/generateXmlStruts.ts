@@ -4,10 +4,14 @@ import { WorkNode, NodeTag} from './types';
 let fd: any;
 let nextWork = null;
 
+
+function logExit(message: string) {
+    process.stdout.write(message);
+    process.exit(1);
+}
 function checkIfFolderExist(rootDir) {
     if (!fs.existsSync(rootDir)) {
-        console.log(rootDir + " does not exist");
-        process.exit(1);
+        logExit(rootDir + " does not exist");
     }
 }
 
@@ -23,13 +27,14 @@ export function generateXmlForFilesStruts(rootDir,targetFile) {
         }
     }
     catch (err) {
-        console.log(err);
-        process.exit(1);
-      } finally {
+        logExit(err);
+    } finally {
         if (fd !== undefined)
           fs.closeSync(fd);
     } 
 }
+
+
 
 /* beginWork for dir
 (1)create the start tag

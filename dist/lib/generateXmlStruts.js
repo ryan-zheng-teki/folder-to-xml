@@ -7,10 +7,13 @@ const fs_1 = __importDefault(require("fs"));
 const types_1 = require("./types");
 let fd;
 let nextWork = null;
+function logExit(message) {
+    process.stdout.write(message);
+    process.exit(1);
+}
 function checkIfFolderExist(rootDir) {
     if (!fs_1.default.existsSync(rootDir)) {
-        console.log(rootDir + " does not exist");
-        process.exit(1);
+        logExit(rootDir + " does not exist");
     }
 }
 function generateXmlForFilesStruts(rootDir, targetFile) {
@@ -24,8 +27,7 @@ function generateXmlForFilesStruts(rootDir, targetFile) {
         }
     }
     catch (err) {
-        console.log(err);
-        process.exit(1);
+        logExit(err);
     }
     finally {
         if (fd !== undefined)
