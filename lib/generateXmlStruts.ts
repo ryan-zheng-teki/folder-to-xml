@@ -139,15 +139,20 @@ function createFileXmlNode(fileNode:WorkNode) {
     fs.appendFileSync(fd, spaces + '<File>\n', 'utf8');
     
     createFileNameTag(fileNode);
+    createFilePathTag(fileNode);
     createCreatedTimeTag(fileNode);
     createModifiedTimeTag(fileNode);
-
     createFileEndTag(fileNode);
 }
 
 function createModifiedTimeTag(fileNode:WorkNode) {
     let spaces = ' '.repeat(fileNode.indent + 3);
     fs.appendFileSync(fd, spaces + '<modifiedTime>'+ fileNode.modifiedTime+'</modifiedTime>\n', 'utf8');
+}
+
+function createFilePathTag(fileNode:WorkNode) {
+    let spaces = ' '.repeat(fileNode.indent + 3);
+    fs.appendFileSync(fd, spaces + '<path>'+ fileNode.path + '</path>\n', 'utf8');
 }
 
 function createFileNameTag(fileNode:WorkNode) {

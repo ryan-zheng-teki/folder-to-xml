@@ -9,7 +9,7 @@ export interface WorkNode {
     indent: number,
     parentNode: WorkNode
     next: WorkNode,
-    createdTime?: Date
-    modifiedTime?: Date
+    createdTime?: Date,
+    modifiedTime?: Date,
     tag: NodeTag
 }

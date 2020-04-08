@@ -2,13 +2,13 @@
     "compilerOptions": {
       "skipLibCheck": true,
       "target": "es6",
-      "module": "es6",
+      "module": "commonjs",
       "outDir": "dist",
-      "sourceMap": true,
+      "sourceMap": false,
       "esModuleInterop":true
     },
     "include": [
-      "src/**/*.ts"
+      "**/*.ts", "index.ts"
     ],
     "exclude": [
       "node_modules"

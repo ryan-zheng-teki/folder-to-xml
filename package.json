@@ -1,19 +1,23 @@
 {
-  "name": "ginit",
+  "name": "folder-to-xml",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "./dist/index.js",
   "scripts": {
     "test": "jest",
     "lint": "eslint",
     "compile": "tsc"
   },
-  "keywords": [
-    "Git",
-    "CLI"
-  ],
+  "keywords": [],
+  "bin": {
+    "folder-to-xml": "./dist/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ryan-zheng-teki/folder-to-xml.git"
+  },
   "author": "Ryan Zheng",
-  "license": "ISC",
+  "license": "MIT",
   "dependencies": {
     "@octokit/auth-basic": "^1.4.2",
     "@octokit/rest": "^17.1.4",

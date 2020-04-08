@@ -4,7 +4,7 @@ So first we have to compile the code to generate the file code structure.
 
 
 # Algorithm
-
+We used a non recursive way of parsing the tree. So it consumes less memory and fast.
 
 
 set current to be the input directory, list all the items in the directory

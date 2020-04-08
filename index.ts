@@ -1,7 +1,8 @@
+#!/usr/bin/env node
 import generateXmlForFilesStruts from './lib/generateXmlStruts';
 
-if(process.argv.length <= 2) {
-    console.log("Usage: " + __filename + " path/to/directory");
+if(process.argv.length <= 3) {
+    console.log("Usage: " + __filename + " path/to/directory targetXmlFile");
     process.exit(-1);
 }
 
