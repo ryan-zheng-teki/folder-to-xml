@@ -1,17 +1,30 @@
 # Introduction
-This package npm tool is used to convert a folder structure into xml file
+This package is used to convert a folder structure into xml file
 
 
 # Algorithm
 We used nonrecursive way of parsing the tree to generate the xml nodes
 
-The data structure used in this algorithm is. The work flow is
+The data structure used in this algorithm is.
  
+
+```
 node {
-    parent
-    sibling
+    parent: node
+    sibling: node
 }  
 
+while(nextWork) {
+beginWork(nextWork);
+}
+
+beginWork(nextWork) {
+    perform work on nextWork
+    if nextWork.sibling not empty
+        return nextWork.sibling
+    call finish(nextWork)
+}
+```
 # Work flow
 Process the current item, after processing the current item, then continue 
 with its sibling. If the current item does not have sibling, then go back to its parent.
